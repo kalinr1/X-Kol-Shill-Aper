@@ -25,14 +25,7 @@ public class TwitterListenerService {
     @PostConstruct
     public void launchPostListener() {
 
-        ChromeOptions options = new ChromeOptions();
-
-        options.addArguments("user-data-dir=" + System.getenv("CHROME_TWITTER_PROFILES_PATH"));
-        options.addArguments("profile-directory=" + System.getenv("CHROME_TWITTER_PROFILE_NAME"));
-        options.addArguments("--remote-debugging-pipe");
-        options.addArguments("--remote-debugging-port=45447");
-
-        ChromeDriver driver = new ChromeDriver(options);
+        ChromeDriver driver = getListenerChromeDriver();
 
         DevTools devTools = driver.getDevTools();
         devTools.createSession();
@@ -59,6 +52,17 @@ public class TwitterListenerService {
 
             applicationEventPublisher.publishEvent(new XNewPostEvent(this, tweetContent, tweetMadeByName));
         });
+    }
+
+    private static ChromeDriver getListenerChromeDriver() {
+        ChromeOptions options = new ChromeOptions();
+
+        options.addArguments("user-data-dir=" + System.getenv("CHROME_TWITTER_PROFILES_PATH"));
+        options.addArguments("profile-directory=" + System.getenv("CHROME_TWITTER_PROFILE_NAME"));
+        options.addArguments("--remote-debugging-pipe");
+        options.addArguments("--remote-debugging-port=45447");
+
+        return new ChromeDriver(options);
     }
 
 }

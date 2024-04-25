@@ -4,20 +4,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
 import java.time.Duration;
 
 @Service
 public class ApeService {
 
-    private static ChromeDriver launchChrome() {
+    private static ChromeDriver getApeChromeDriver() {
         ChromeOptions options = new ChromeOptions();
 
         options.addArguments("user-data-dir=" + System.getenv("CHROME_APE_PROFILES_PATH"));
@@ -31,7 +27,7 @@ public class ApeService {
 
         System.out.println("Can't open browser");
 
-        ChromeDriver driver = launchChrome();
+        ChromeDriver driver = getApeChromeDriver();
 
         driver.get("https://web.telegram.org/k/#@odysseus_trojanbot");
 
