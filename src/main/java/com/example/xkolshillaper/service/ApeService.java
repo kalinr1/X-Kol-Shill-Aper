@@ -17,12 +17,6 @@ import java.time.Duration;
 @Service
 public class ApeService {
 
-
-    public void launch() throws InterruptedException {
-        String ca = "test";
-        trojanApe(ca);
-    }
-
     private static ChromeDriver launchChrome() {
         ChromeOptions options = new ChromeOptions();
 
