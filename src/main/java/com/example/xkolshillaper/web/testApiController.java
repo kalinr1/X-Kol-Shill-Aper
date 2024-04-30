@@ -20,7 +20,7 @@ public class testApiController {
         this.twitterListenerService = twitterListenerService;
     }
 
-    @GetMapping("/apeTest/{ca}")
+    @PostMapping("/apeTest/{ca}")
     public void apeTest(@PathVariable String ca) throws InterruptedException {
         apeService.trojanApe(ca);
     }
@@ -30,7 +30,7 @@ public class testApiController {
 //        newPostService.launchDriverLoginAndListenForNotifications();
 //    }
 
-    @GetMapping("/twitterListener")
+    @PostMapping("/twitterListener")
     public void testLaunchTwitterListener(){
         twitterListenerService.launchPostListener();
     }
